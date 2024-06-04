@@ -9,4 +9,6 @@ const Result = (props: any) => {
   );
 };
 
+export const runtime = "edge";
+
 export default Result;
