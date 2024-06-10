@@ -10,7 +10,6 @@ const Sidebar = ({ children }) => {
         </div>
         <History />
       </nav>
-      Sidebar
       <div className="flex-1">{children}</div>
     </div>
   );
