@@ -37,6 +37,8 @@ interface GameData {
 import React, { useEffect, useState } from "react";
 import { fetchGameData } from "@/lib/utils";
 
+export const runtime = "edge";
+
 const Result = (props: any) => {
   const [gameData, setGameData] = useState<GameData[] | null>(null);
   const [loading, setLoading] = useState(true);
@@ -84,5 +86,5 @@ const Result = (props: any) => {
     </div>
   );
 };
-
+//https://ddragon.leagueoflegends.com/cdn/14.11.1/data/ko_KR/champion.json 로 key값 정리하기
 export default Result;
