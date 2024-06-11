@@ -9,7 +9,7 @@ const Page = () => {
 
   const onClickSearch = () => {
     const formattedInputData = inputData.replace("#", "-");
-    console.log("formattedInputData", formattedInputData);
+    // console.log("formattedInputData", formattedInputData);
     router.push(`/result/${formattedInputData}`);
   };
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

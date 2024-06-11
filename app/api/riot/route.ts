@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export const runtime = "edge";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const apiKey = process.env.API_KEY;
+const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
   console.log(gameName, tagLine);
   try {
     const headers = {
-      "X-Riot-Token": "RGAPI-ab2a5e0c-1478-4e58-829a-57018cff00b0",
+      "X-Riot-Token": process.env.LOL_API_KEY,
     };
     const accountResponse = await axios.get(
       `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(
