@@ -23,6 +23,7 @@ interface GameData {
   puuid: string;
   championId: number;
   championLevel: number;
+  championName: string;
   championPoints: number;
   lastPlayTime: number;
   championPointsSinceLastLevel: number;
@@ -47,8 +48,10 @@ const Result = (props: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("props.params.id", decodeURIComponent(props.params.id));
+        // console.log("props.params.id", decodeURIComponent(props.params.id));
         const data = await fetchGameData(decodeURIComponent(props.params.id));
+
+        console.log("data", data);
 
         setGameData(data);
         setLoading(false);
@@ -59,7 +62,7 @@ const Result = (props: any) => {
     };
 
     fetchData();
-  }, []);
+  }, [props.params.id]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -80,6 +83,7 @@ const Result = (props: any) => {
               <p>Champion ID: {data.championId}</p>
               <p>Champion Level: {data.championLevel}</p>
               <p>Champion Points: {data.championPoints}</p>
+              <p>Champion Name: {data.championName}</p>
             </li>
           ))}
       </ul>
