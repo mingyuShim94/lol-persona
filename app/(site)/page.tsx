@@ -18,20 +18,26 @@ const Page = () => {
     }
   };
   return (
-    <div>
+    <div className="flex flex-col  items-center  bg-gray-100 min-h-screen justify-center">
+      <h1 className="text-[30px] font-extrabold mb-4 lg:text-[40px]">
+        LOL - Persona
+      </h1>
+      <h2 className="text-[15px] font-semibold mb-8 text-center lg:text-[20px] ">
+        당신의 챔피언 취향이 성격을 말해줍니다.
+      </h2>
       <input
         type="text"
         placeholder="Summoner name + #KR1"
-        className="p-2 text-gray-800 bg-white border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+        className="p-3 text-gray-800 bg-white border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 lg:w-[270px] w-[220px] mb-4"
         value={inputData}
         onChange={(e) => setInputData(e.target.value)}
         onKeyDown={onKeyDown}
       />
       <button
-        className="bg-blue-500 text-white p-2 rounded-md"
+        className="bg-blue-600 text-white p-3 rounded-md w-[220px] hover:bg-blue-700 lg:w-[270px] transition-colors"
         onClick={onClickSearch}
       >
-        search
+        성격분석하기
       </button>
     </div>
   );
