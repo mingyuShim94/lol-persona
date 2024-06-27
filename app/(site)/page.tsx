@@ -19,7 +19,6 @@ const Page = () => {
 
   const regions = ["Korea", "North America", "Europe West"];
   const [showAlert, setShowAlert] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("Korea");
 
   const onClickSearch = () => {
@@ -29,7 +28,7 @@ const Page = () => {
     } else {
       const formattedInputData = inputData.replace("#", "-");
       alert(`Searching for: ${formattedInputData} in ${selectedRegion}`);
-      // router.push(`/result/${formattedInputData}`);
+      router.push(`/result/${formattedInputData}?region=${selectedRegion}`);
     }
   };
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,7 +81,7 @@ const Page = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Summoner name + #KR1"
+              placeholder="Game Name + #KR1"
               className="w-full p-3 text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               value={inputData}
               onChange={(e) => setInputData(e.target.value)}
@@ -103,9 +102,7 @@ const Page = () => {
             </svg>
           </div>
           <Button
-            className={`w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-lg shadow-lg transform transition duration-200 ${
-              isHovering ? "scale-105" : ""
-            }`}
+            className={`w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-lg shadow-lg transform transition duration-200 ${"scale-105"}`}
             onClick={onClickSearch}
           >
             Analyze Personality
@@ -116,7 +113,7 @@ const Page = () => {
         <Alert className="w-full max-w-md mt-4 bg-red-900 border-red-700 text-red-100">
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>
-            Please enter a summoner name before searching.
+            Please enter a game name before searching.
           </AlertDescription>
         </Alert>
       )}

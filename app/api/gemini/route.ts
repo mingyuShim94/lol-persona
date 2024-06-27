@@ -10,7 +10,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
   systemInstruction:
-    "당신은 최고의 게임행동심리분석박사이다. 여러 롤 챔피언의 숙련도보고 플레이어의 성격의 장점과 단점을 명료하게 분석해낸다.",
+    "You are the best doctor of game behavioral psychology. Look at the proficiency of several role champions and clearly analyze the strengths and weaknesses of a player's personality.",
 });
 
 const generationConfig = {

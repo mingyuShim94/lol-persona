@@ -1,36 +1,51 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
+const regionMapping: { [key: string]: string } = {
+  Korea: "asia",
+  "North America": "na1",
+  "Europe West": "euw1",
+};
+
 export const runtime = "edge";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
-  console.log("id받음", id);
-  if (!id) {
-    return NextResponse.json(
-      { message: "id 파라미터가 필요합니다." },
-      { status: 400 }
-    );
-  }
-  let gameName = "";
-  let tagLine = "";
-  if (id.includes("-")) {
-    [gameName, tagLine] = id.split("-");
-  } else {
-    gameName = id;
-    tagLine = "kr1";
-  }
-  console.log(gameName, tagLine);
   try {
+    const { searchParams } = new URL(request.url);
+    const userDataString = searchParams.get("userData");
+
+    console.log("userData 받음:", userDataString);
+    if (!userDataString) {
+      return NextResponse.json(
+        { message: "id 파라미터가 필요합니다." },
+        { status: 400 }
+      );
+    }
+
+    const userData = JSON.parse(userDataString);
+    const region = userData.region;
+    const regionId = regionMapping[region];
+    let [gameName, tagLine] = userData.id.includes("-")
+      ? userData.id.split("-")
+      : [userData.id, region];
+
+    console.log(
+      "region:",
+      region,
+      "gameName:",
+      gameName,
+      "tagLine:",
+      tagLine,
+      "regionId:",
+      regionId
+    );
+
     const headers = {
       "X-Riot-Token": process.env.LOL_API_KEY,
     };
+
     const accountResponse = await axios.get(
-      `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(
-        gameName
-      )}/${tagLine}`,
+      `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
       { headers }
     );
     const { puuid } = accountResponse.data;
@@ -59,8 +74,9 @@ export async function GET(request: Request) {
 
     return NextResponse.json(result);
   } catch (error) {
+    console.error("Error:", error);
     return NextResponse.json(
-      { message: "API 요청 중 오류 발생" },
+      { message: "요청 처리 중 오류가 발생했습니다." },
       { status: 500 }
     );
   }
