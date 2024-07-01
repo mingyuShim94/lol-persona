@@ -340,7 +340,17 @@ const Result = (props: any) => {
       </div>
     );
   };
-
+  const AnalysisLoading = () => (
+    <div className="bg-gray-900 p-6 rounded-lg shadow-lg border-2 border-yellow-500 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-500 mx-auto mb-4"></div>
+        <h2 className="text-2xl font-bold text-yellow-400">
+          AI가 분석 중입니다
+        </h2>
+        <p className="text-blue-300 mt-2">잠시만 기다려주세요...</p>
+      </div>
+    </div>
+  );
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 text-white p-8">
       <div className="max-w-6xl mx-auto">
@@ -360,8 +370,15 @@ const Result = (props: any) => {
             ))}
         </div>
 
-        {geminiDataJson && (
+        {/* {geminiDataJson && (
           <PersonalityAnalysis geminiDataJson={geminiDataJson} />
+        )} */}
+
+        {geminiDataJson ? (
+          <PersonalityAnalysis geminiDataJson={geminiDataJson} />
+        ) : (
+          // <AnalysisLoading />
+          <AnalysisLoading />
         )}
       </div>
     </div>
