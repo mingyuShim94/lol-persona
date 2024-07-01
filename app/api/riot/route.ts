@@ -1,12 +1,17 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-const regionMapping: { [key: string]: string } = {
-  Korea: "asia",
+const riotAPIregion: { [key: string]: string } = {
+  Korea: "kr",
   "North America": "na1",
   "Europe West": "euw1",
 };
 
+const dragonAPIregion: { [key: string]: string } = {
+  Korea: "ko_KR",
+  "North America": "en_US",
+  "Europe West": "en_US",
+};
 export const runtime = "edge";
 
 export async function GET(request: Request) {
@@ -24,10 +29,12 @@ export async function GET(request: Request) {
 
     const userData = JSON.parse(userDataString);
     const region = userData.region;
-    const regionId = regionMapping[region];
+    const regionId_riot = riotAPIregion[region];
+    const regionId_dragon = dragonAPIregion[region];
+    //
     let [gameName, tagLine] = userData.id.includes("-")
       ? userData.id.split("-")
-      : [userData.id, region];
+      : [userData.id, regionId_riot];
 
     console.log(
       "region:",
@@ -36,8 +43,10 @@ export async function GET(request: Request) {
       gameName,
       "tagLine:",
       tagLine,
-      "regionId:",
-      regionId
+      "regionId_riot:",
+      regionId_riot,
+      "regionId_dragon:",
+      regionId_dragon
     );
 
     const headers = {
@@ -51,12 +60,12 @@ export async function GET(request: Request) {
     const { puuid } = accountResponse.data;
 
     const masteryResponse = await axios.get(
-      `https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}/top?count=6`,
+      `https://${regionId_riot}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}/top?count=12`,
       { headers }
     );
 
     const championInfo = await axios.get(
-      "https://ddragon.leagueoflegends.com/cdn/14.11.1/data/ko_KR/champion.json"
+      `https://ddragon.leagueoflegends.com/cdn/14.11.1/data/${regionId_dragon}/champion.json`
     );
 
     const masteryData = masteryResponse.data;

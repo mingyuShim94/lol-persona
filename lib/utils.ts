@@ -18,12 +18,13 @@ export const fetchGameData = async (userData: any) => {
   }
 };
 
-export const fetchGeminiData = async (data: string) => {
+export const fetchGeminiData = async (data: string, userData: any) => {
   console.log("챔피언 숙련도 데이터받음", data);
   try {
     const response = await axios.get(`/api/gemini`, {
       params: {
         data: JSON.stringify(data),
+        userData: JSON.stringify(userData),
       },
     });
     return response.data;

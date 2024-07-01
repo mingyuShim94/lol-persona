@@ -14,13 +14,41 @@ import { FaChevronDown } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 const Page = () => {
+  const regionTags = [
+    {
+      region: "Korea",
+      tag: "KR1",
+      subtitle1: "당신의 챔피언 선호도가",
+      subtitle2: "당신의 성격을 드러냅니다.",
+      gameNameText: "플레이어 이름",
+      analyzeText: "성격분석하기",
+    },
+    {
+      region: "North America",
+      tag: "NA1",
+      subtitle1: "Your champion preferences",
+      subtitle2: "reveal your personality",
+      gameNameText: "Game Name",
+      analyzeText: "Analyze Personality",
+    },
+    {
+      region: "Europe West",
+      tag: "EUW",
+      subtitle1: "Your champion preferences",
+      subtitle2: "reveal your personality",
+      gameNameText: "Game Name",
+      analyzeText: "Analyze Personality",
+    },
+  ];
   const router = useRouter();
   const [inputData, setInputData] = useState(""); // 추가: 입력 데이터 상태 관리
 
-  const regions = ["Korea", "North America", "Europe West"];
   const [showAlert, setShowAlert] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("Korea");
-
+  const [subtitle1, setSubtitle1] = useState("당신의 챔피언 선호도가");
+  const [subtitle2, setSubtitle2] = useState("당신의 성격을 드러냅니다.");
+  const [gameNameText, setGameNameText] = useState("플레이어 이름");
+  const [analyzeText, setAnalyzeText] = useState("성격분석하기");
   const onClickSearch = () => {
     if (inputData.trim() === "") {
       setShowAlert(true);
@@ -36,6 +64,11 @@ const Page = () => {
       onClickSearch();
     }
   };
+  const getPlaceholder = (selectedRegion: string) => {
+    const regionTag =
+      regionTags.find((rt) => rt.region === selectedRegion)?.tag || "KR1";
+    return `${gameNameText} + #${regionTag}`;
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 text-white p-4">
       <div className="w-full max-w-md px-6 py-8 bg-gray-800 rounded-lg shadow-2xl border-2 border-yellow-500 transform transition duration-500 ">
@@ -43,9 +76,9 @@ const Page = () => {
           LOL - Persona
         </h1>
         <h2 className="text-lg font-medium mb-8 text-center text-blue-300">
-          Your champion preferences
+          {subtitle1}
           <br />
-          reveal your personality
+          {subtitle2}
         </h2>
         <div className="flex flex-col space-y-4 ">
           <div className="relative z-20 flex">
@@ -63,16 +96,20 @@ const Page = () => {
                 align="start"
                 className="w-[390px] origin-top-right absolute left-0 mt-2  rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 z-10"
               >
-                {regions.map((region) => (
+                {regionTags.map((regionTag) => (
                   <DropdownMenuCheckboxItem
-                    key={region}
+                    key={regionTag.tag}
                     onClick={() => {
-                      setSelectedRegion(region);
+                      setSelectedRegion(regionTag.region);
+                      setSubtitle1(regionTag.subtitle1);
+                      setSubtitle2(regionTag.subtitle2);
+                      setGameNameText(regionTag.gameNameText);
+                      setAnalyzeText(regionTag.analyzeText);
                     }}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
                     role="menuitem"
                   >
-                    {region}
+                    {regionTag.region}
                   </DropdownMenuCheckboxItem>
                 ))}
               </DropdownMenuContent>
@@ -81,7 +118,7 @@ const Page = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Game Name + #KR1"
+              placeholder={getPlaceholder(selectedRegion)}
               className="w-full p-3 text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               value={inputData}
               onChange={(e) => setInputData(e.target.value)}
@@ -105,7 +142,7 @@ const Page = () => {
             className={`w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-lg shadow-lg transform transition duration-200 ${"scale-105"}`}
             onClick={onClickSearch}
           >
-            Analyze Personality
+            {analyzeText}
           </Button>
         </div>
       </div>
