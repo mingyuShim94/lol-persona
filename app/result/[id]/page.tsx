@@ -344,10 +344,8 @@ const Result = (props: any) => {
     <div className="bg-gray-900 p-6 rounded-lg shadow-lg border-2 border-yellow-500 flex items-center justify-center">
       <div className="text-center">
         <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-500 mx-auto mb-4"></div>
-        <h2 className="text-2xl font-bold text-yellow-400">
-          AI가 분석 중입니다
-        </h2>
-        <p className="text-blue-300 mt-2">잠시만 기다려주세요...</p>
+        <h2 className="text-2xl font-bold text-yellow-400">AI is analyzing</h2>
+        <p className="text-blue-300 mt-2">Please wait a moment...</p>
       </div>
     </div>
   );
