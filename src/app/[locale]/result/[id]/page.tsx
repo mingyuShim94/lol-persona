@@ -41,7 +41,6 @@ export default async function Result(props: any) {
   const region = props.searchParams.region;
   // console.log("userId", userId);
   // console.log("region", region);
-
   const riotData = await fetchRiotData(userId, region);
   const geminiData = await fetchGeminiData(riotData);
   const geminiDataJson = JSON.parse(geminiData);

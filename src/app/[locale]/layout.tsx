@@ -4,6 +4,8 @@ import "./globals.css";
 import MainHeader from "@/components/mainHeader";
 import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   // title: "lol-persona",
@@ -38,13 +40,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+  params: { locale: string };
+}
+
+export default async function RootLayout({
+  children,
+  params: { locale },
+}: RootLayoutProps) {
+  const messages = await getMessages();
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <Script
           async
@@ -53,8 +60,10 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <MainHeader />
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          <MainHeader />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

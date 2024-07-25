@@ -1,13 +1,16 @@
 import axios from "axios";
 import { geminiApiParams } from "./constant";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { getTranslations } from "next-intl/server";
 
 const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 export const fetchGeminiData = async (riotData: any) => {
   //   console.log("riotData:", riotData);
+  const t = await getTranslations("locale");
+  // console.log("t:", t("language"));
 
-  const systemPrompt = geminiApiParams.system_instruction + "English.";
+  const systemPrompt = geminiApiParams.system_instruction + t("language") + ".";
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
     systemInstruction: systemPrompt,

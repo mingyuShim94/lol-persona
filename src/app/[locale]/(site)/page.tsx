@@ -11,15 +11,18 @@ import {
 import { FaChevronDown } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { allText, regionTags } from "@/lib/constant";
+import { regionTags } from "@/lib/constant";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useUIState from "@/hooks/useUIState";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
   const router = useRouter();
   const { region, setRegion } = useUIState();
   const [inputData, setInputData] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const HomeText = useTranslations("Home");
+  const localeText = useTranslations("locale");
 
   const onClickSearch = () => {
     if (inputData.trim() === "") {
@@ -27,7 +30,9 @@ const Page = () => {
       setTimeout(() => setShowAlert(false), 3000);
     } else {
       const formattedInputData = inputData.replace("#", "-");
-      router.push(`/result/${formattedInputData}?region=${region}`);
+      router.push(
+        `${localeText("code")}/result/${formattedInputData}?region=${region}`
+      );
     }
   };
 
@@ -44,9 +49,9 @@ const Page = () => {
           LOL - Persona
         </h1>
         <h2 className="text-sm sm:text-base md:text-lg font-medium mb-6 text-center text-blue-300">
-          {allText.subtitle1}
+          {HomeText("subtitle1")}
           <br />
-          {allText.subtitle2}
+          {HomeText("subtitle2")}
         </h2>
         <div className="flex flex-col space-y-4">
           <DropdownMenu>
@@ -79,7 +84,7 @@ const Page = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder={`${allText.gameNameText} + #${region}`}
+              placeholder={`${HomeText("gameNameText")} + #${region}`}
               className="w-full p-3 text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               value={inputData}
               onChange={(e) => setInputData(e.target.value)}
@@ -103,7 +108,7 @@ const Page = () => {
             className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-lg shadow-lg transform transition duration-200"
             onClick={onClickSearch}
           >
-            {allText.analyzeText}
+            {HomeText("analyzeText")}
           </Button>
         </div>
       </div>

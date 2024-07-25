@@ -85,13 +85,6 @@ export const regionTags: {
   },
 };
 
-export const allText = {
-  subtitle1: "Your champion preferences",
-  subtitle2: "reveal your personality",
-  gameNameText: "Game Name",
-  analyzeText: "Analyze Personality",
-};
-
 export const riotApiParams = {
   dragonRegion: "en_US",
   searchCount: 12,

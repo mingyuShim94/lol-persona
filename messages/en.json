@@ -1,0 +1,12 @@
+{
+  "Home": {
+    "subtitle1": "Your champion preferences",
+    "subtitle2": "reveal your personality",
+    "gameNameText": "Game Name",
+    "analyzeText": "Analyze Personality"
+  },
+  "locale": {
+    "language": "English",
+    "code": "en"
+  }
+}

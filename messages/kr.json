@@ -1,0 +1,12 @@
+{
+  "Home": {
+    "subtitle1": "당신이 선호하는 챔피언이",
+    "subtitle2": "당신의 성격을 말해줍니다!",
+    "gameNameText": "플레이어 이름",
+    "analyzeText": "성격 분석하기"
+  },
+  "locale": {
+    "language": "Korean",
+    "code": "kr"
+  }
+}
