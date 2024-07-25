@@ -2,6 +2,10 @@
 import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 const API_KEY = process.env.API_KEY;
-const nextConfig = {};
+const nextConfig = {
+  experimental: {
+    runtime: "edge",
+  },
+};
 
 export default withNextIntl(nextConfig);
