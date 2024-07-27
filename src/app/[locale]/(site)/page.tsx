@@ -73,7 +73,7 @@ const Page = () => {
                   <DropdownMenuCheckboxItem
                     key={regionTag}
                     onClick={() => setRegion(regionTag)}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
+                    className="block w-full text-left px-4 py-3 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out border-b border-gray-700 last:border-b-0"
                   >
                     {regionTags[regionTag].regionName}
                   </DropdownMenuCheckboxItem>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaGlobe, FaHome } from "react-icons/fa";
+import LocaleSwitcher from "./localeSwitcher";
 import PagePadding from "./pagePadding";
 
 export default function MainHeader() {
@@ -14,6 +15,7 @@ export default function MainHeader() {
             <FaHome className="mr-2" />
             <span>LOL-Persona</span>
           </Link>
+          <LocaleSwitcher />
         </div>
       </PagePadding>
     </header>
