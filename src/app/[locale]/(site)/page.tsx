@@ -16,7 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import useUIState from "@/hooks/useUIState";
 import { useTranslations } from "next-intl";
 
-const Page = () => {
+export default function Home() {
   const router = useRouter();
   const { region, setRegion } = useUIState();
   const [inputData, setInputData] = useState("");
@@ -122,6 +122,4 @@ const Page = () => {
       )}
     </div>
   );
-};
-
-export default Page;
+}

@@ -34,6 +34,7 @@ import ChampMasteryUI from "@/components/champMasteryUI";
 import { fetchRiotData } from "@/lib/riotApi";
 import { fetchGeminiData } from "@/lib/geminiApi";
 import { sleep } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 
 export default async function Result(props: any) {
   console.log("props", props);
@@ -44,6 +45,7 @@ export default async function Result(props: any) {
   const riotData = await fetchRiotData(userId, region);
   const geminiData = await fetchGeminiData(riotData);
   const geminiDataJson = JSON.parse(geminiData);
+  const resultText = await getTranslations("result");
 
   const SwordIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <svg
@@ -188,14 +190,14 @@ export default async function Result(props: any) {
     return (
       <div className="bg-gray-900 p-4 sm:p-6 rounded-lg shadow-lg border-2 border-yellow-500">
         <h2 className="text-2xl font-bold mb-6 text-center text-yellow-400">
-          Your LOL Personality Analysis
+          {resultText("title")}
         </h2>
 
         {/* Summary Section */}
         <div className="mb-8 bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg border-2 border-yellow-500">
           <h3 className="text-xl sm:text-2xl font-bold mb-4 text-yellow-400 flex items-center justify-center">
             <TargetIcon className="mr-2 w-6 h-6 sm:w-8 sm:h-8" />
-            Summary
+            {resultText("summary")}
           </h3>
           <p className="text-blue-200 text-center text-lg">
             {geminiDataJson.summary}
@@ -205,19 +207,19 @@ export default async function Result(props: any) {
         {/* Main Analysis Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <AnalysisSection
-            title="Strengths"
+            title={resultText("Strengths")}
             tags={geminiDataJson.strengths.tags}
             description={geminiDataJson.strengths.description}
             icon={SwordIcon}
           />
           <AnalysisSection
-            title="Weaknesses"
+            title={resultText("Weaknesses")}
             tags={geminiDataJson.weaknesses.tags}
             description={geminiDataJson.weaknesses.description}
             icon={ShieldIcon}
           />
           <AnalysisSection
-            title="Improvements"
+            title={resultText("Improvements")}
             tags={geminiDataJson.improvements.tags}
             description={geminiDataJson.improvements.description}
             icon={TrendingUpIcon}

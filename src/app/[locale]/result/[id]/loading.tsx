@@ -1,20 +1,28 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React, { useState, useEffect } from "react";
 
 const Loading = () => {
   const [currentText, setCurrentText] = useState(0);
-  const texts = [
-    "Analyzing champions",
-    "Decoding playstyle",
-    "Calculating performance",
-    "Unveiling persona",
-  ];
+  // const texts = [
+  //   "Analyzing champions",
+  //   "Decoding playstyle",
+  //   "Calculating performance",
+  //   "Unveiling persona",
+  // ];
 
+  const ResultLoadingText = useTranslations("resultLoading");
+  const texts = [
+    ResultLoadingText("loadingText1"),
+    ResultLoadingText("loadingText2"),
+    ResultLoadingText("loadingText3"),
+    ResultLoadingText("loadingText4"),
+  ];
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentText((prevText) => (prevText + 1) % texts.length);
-    }, 2000);
+    }, 200000);
     return () => clearInterval(timer);
   }, [texts.length]);
 
@@ -28,13 +36,13 @@ const Loading = () => {
         </div>
       </div>
       <h2 className="text-4xl font-bold mb-4 text-yellow-400 animate-pulse">
-        Summoning Your Persona
+        {ResultLoadingText("title")}
       </h2>
       <p className="text-2xl text-blue-300 mb-2 text-center h-8">
         {texts[currentText]}...
       </p>
       <p className="text-lg text-blue-200 mb-6 text-center">
-        AI is weaving your unique LoL identity
+        {ResultLoadingText("subtitle")}
       </p>
       <div className="flex space-x-2 mt-4">
         {[0, 1, 2, 3, 4].map((_, index) => (
@@ -46,8 +54,7 @@ const Loading = () => {
         ))}
       </div>
       <p className="text-sm text-blue-300 mt-8 text-center max-w-md">
-        &quot;In the Fields of Justice, every champion tells a story. Your story
-        is being written.&quot;
+        &quot;{ResultLoadingText("bottomText")}&quot;
       </p>
     </div>
   );

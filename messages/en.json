@@ -7,6 +7,23 @@
   },
   "locale": {
     "language": "English",
-    "code": "en"
+    "code": "en",
+    "ddragonRegion": "en_US"
+  },
+  "resultLoading": {
+    "title": "Summoning Your Persona",
+    "loadingText1": "Analyzing champions",
+    "loadingText2": "Decoding playstyle",
+    "loadingText3": "Calculating performance",
+    "loadingText4": "Unveiling persona",
+    "subtitle": "AI is weaving your unique LoL identity",
+    "bottomText": "In the Fields of Justice, every champion tells a story. Your story is being written."
+  },
+  "result": {
+    "title": "Your LOL Personality Analysis",
+    "summary": "Summary",
+    "Strengths": "Strengths",
+    "Weaknesses": "Weaknesses",
+    "Improvements": "Improvements"
   }
 }

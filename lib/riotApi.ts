@@ -1,20 +1,25 @@
 import axios from "axios";
 import { regionTags, riotApiParams } from "./constant";
+import { getTranslations } from "next-intl/server";
 // export const runtime = "edge";
 export const fetchRiotData = async (userData: any, region: any) => {
-  console.log("fetchRiot userData: ", userData);
-  console.log("fetchRiot region: ", region);
+  console.log("fetchRiotData called", new Date().toISOString());
+  // console.log("fetchRiot userData: ", userData);
+  // console.log("fetchRiot region: ", region);
 
   try {
     const headers = {
       "X-Riot-Token": process.env.LOL_API_KEY,
     };
     const defaultNameTag = regionTags[region].riotApiTag;
-    const regionId_dragon = riotApiParams.dragonRegion;
+    // const regionId_dragon = riotApiParams.dragonRegion;
     const searchCount = riotApiParams.searchCount;
     const [gameName, tagLine] = userData.includes("-")
       ? userData.split("-")
       : [userData, defaultNameTag];
+
+    const t = await getTranslations("locale");
+    const regionId_dragon = t("ddragonRegion");
 
     const accountResponse = await axios.get(
       `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,

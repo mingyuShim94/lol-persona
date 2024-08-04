@@ -86,7 +86,6 @@ export const regionTags: {
 };
 
 export const riotApiParams = {
-  dragonRegion: "en_US",
   searchCount: 12,
 };
 

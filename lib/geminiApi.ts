@@ -2,10 +2,13 @@ import axios from "axios";
 import { geminiApiParams } from "./constant";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 import { getTranslations } from "next-intl/server";
+import { cache } from "react";
 
 const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
-export const fetchGeminiData = async (riotData: any) => {
+
+export const fetchGeminiData = cache(async (riotData: any) => {
+  console.log("fetchGeminiData called", new Date().toISOString());
   //   console.log("riotData:", riotData);
   const t = await getTranslations("locale");
   // console.log("t:", t("language"));
@@ -51,4 +54,4 @@ export const fetchGeminiData = async (riotData: any) => {
     }
     throw error;
   }
-};
+});

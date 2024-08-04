@@ -7,6 +7,23 @@
   },
   "locale": {
     "language": "Korean",
-    "code": "kr"
+    "code": "kr",
+    "ddragonRegion": "ko_KR"
+  },
+  "resultLoading": {
+    "title": "당신의 페르소나 소환 중",
+    "loadingText1": "챔피언 분석 중",
+    "loadingText2": "플레이 스타일 분석 중",
+    "loadingText3": "성과 계산 중",
+    "loadingText4": "페르소나 분석 중",
+    "subtitle": "AI가 당신만의 롤 정체성을 만들어내고 있습니다",
+    "bottomText": "정의의 들판에서, 모든 챔피언은 이야기를 들려줍니다. 당신의 이야기가 쓰여지고 있습니다."
+  },
+  "result": {
+    "title": "당신의 롤 성격 분석 결과",
+    "summary": "요약",
+    "Strengths": "강점",
+    "Weaknesses": "약점",
+    "Improvements": "개선점"
   }
 }
